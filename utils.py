@@ -257,6 +257,7 @@ class Model_Trainer():
                     if acc_tot > self.val_acc:
                         torch.save(self.cnn, 'optimal_model_validated_borugh_{}.pth'.format(self.borough))
                         print('\nmaximum test accuracy: ', acc_tot)
+                        self.val_acc = acc_tot
                 imgs, labels = self.data_loader.get_sample()
                 self.optimizer.zero_grad()
                 preds = self.cnn(imgs)
@@ -271,6 +272,7 @@ class Model_Trainer():
                         if acc_tot > self.val_acc:
                             torch.save(self.cnn, 'optimal_model_validated_borugh_{}.pth'.format(self.borough))
                             print('\nmaximum test accuracy: ', acc_tot)
+                            self.val_acc = acc_tot
                 loss.backward()
                 self.optimizer.step()
                 self.losses.append(loss.detach())
