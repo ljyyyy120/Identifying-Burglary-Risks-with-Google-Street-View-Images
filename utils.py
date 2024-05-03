@@ -273,6 +273,7 @@ class Model_Trainer():
                             torch.save(self.cnn, 'optimal_model_validated_borugh_{}.pth'.format(self.borough))
                             print('\nmaximum test accuracy: ', acc_tot)
                             self.val_acc = acc_tot
+                        self.min_loss = loss
                 loss.backward()
                 self.optimizer.step()
                 self.losses.append(loss.detach())
